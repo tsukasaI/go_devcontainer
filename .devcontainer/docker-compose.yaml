@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  go:
+    container_name: "go-container"
+    volumes:
+      - ../:/project/
+    working_dir: /project/
+    tty: true
+    build: "./"
+
+  db:
+    container_name: "go_db"
+    image: mysql:8.0
+    platform: linux/x86_64
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      - MYSQL_DATABASE=go_db
+      - MYSQL_PASSWORD=go_db
+      - MYSQL_USER=go_db
+      - MYSQL_ROOT_PASSWORD=go_db
+    ports:
+      - "3306:3306"
